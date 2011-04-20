@@ -5,9 +5,8 @@ Setup your DB in config/database.rb
 Setup your Redis installation in config/redis.yml
 Setup your admin account in db/seeds.rb
 
-```padrino rake dm:migrate
-padrino rake seed
-```
+`padrino rake dm:migrate`
+`padrino rake seed`
 
 Create a "redirect" in /admin/.
 Click on the "Show" link for a redirect and grab the generated QR Code.
