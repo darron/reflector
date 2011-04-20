@@ -1,0 +1,34 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active=link_to pat(:list), url(:redirects, :index)
+      %li=link_to pat(:new), url(:redirects, :new)
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:redirects)
+    .inner
+      %table.table
+        %tr
+          %th.first=mat(:redirect, :id)
+          %th=mat(:redirect, :title)
+          %th=mat(:redirect, :url)
+          %th Count 
+          %th.last="&nbsp;"
+        -@redirects.each do |redirect|
+          %tr
+            %td.first=redirect.id
+            %td=redirect.title
+            %td=redirect.url
+            %td
+              = $redis.get "reflect_hit_total:#{redirect.id}"
+            %td.last
+              =button_to pat(:show), url(:redirects, :show, :id => redirect.id), :method => :get, :class => :button_to
+              ="|"
+              =button_to pat(:edit), url(:redirects, :edit, :id => redirect.id), :method => :get, :class => :button_to
+              ="|"
+              =button_to pat(:delete), url(:redirects, :destroy, :id => redirect.id), :method => :delete, :class => :button_to
+      .actions-bar.wat-cf
+        .actions="&nbsp;"
+
+-content_for :sidebar, partial("base/sidebar")
