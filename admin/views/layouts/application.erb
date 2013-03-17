@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Padrino Admin</title>
+  <title>Reflector Admin</title>
   <%= stylesheet_link_tag :base, "themes/default/style" %>
 </head>
 <body>
   <div id="container">
     <div id="header">
-      <h1><%= link_to "Padrino Admin", url(:base_index) %></h1>
+      <h1><%= link_to "Reflector Admin", url(:base_index) %></h1>
       <div id="user-navigation">
         <ul class="wat-cf">
           <li><%= link_to pat(:profile), url(:accounts, :edit, :id => current_account.id) %></li>
@@ -31,7 +31,7 @@
         <%= yield %>
         <div id="footer">
           <div class="block">
-            <p>Copyright &copy; <%= Time.now.year %> Your Site - Powered by <a href="http://www.padrinorb.com" target="_blank">Padrino v.<%= Padrino.version %>.</a></p>
+            <p>Copyright &copy; <%= Time.now.year %> Reflector - Powered by <a href="http://www.padrinorb.com" target="_blank">Padrino v.<%= Padrino.version %>.</a></p>
           </div>
         </div>
       </div>
