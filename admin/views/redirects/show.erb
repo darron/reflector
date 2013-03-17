@@ -1,0 +1,19 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to pat(:list), url(:redirects, :index) %></li>
+      <li><%= link_to pat(:new), url(:redirects, :new) %></li>
+      <li class="active"><%= link_to pat(:edit), url(:redirects, :edit, :id => @redirect.id) %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= pat(:edit) %> <% mt(:redirect) %></h2>
+    <div class="inner">
+      <h3><%= @redirect.title %></h3>
+      <p><a href="<%= @redirect.url %>"><%= @redirect.url %></a></p>
+      <h4>QR Code</h4>
+      <p><%= image_tag(@google_url) %></p>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, partial("base/sidebar") %>
