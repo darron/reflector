@@ -16,6 +16,10 @@ Fork/Clone this repo - then:
 * Click on the "Show" link for a redirect and grab the generated QR Code.
 * Scan the QR Code - that logs a simple counter in Redis.
 
+Take a look at this example QR Code:
+
+![Scan me.](https://raw.github.com/darron/reflector/master/example.png)
+
 ## Clients can create their own QR Codes and they get logged when they're used.
 
 ## TODO - patches welcome: 
