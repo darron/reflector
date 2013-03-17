@@ -21,12 +21,15 @@ gem 'dm-migrations'
 gem 'dm-constraints'
 gem 'dm-aggregates'
 gem 'dm-core'
+gem 'haml'
 
 gem 'therubyracer'
 
 gem 'foreman'
 
 gem 'json'
+
+gem 'redis'
 
 group :development do
   gem 'dm-sqlite-adapter'
