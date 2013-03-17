@@ -7,9 +7,8 @@ class Account
   property :id,               Serial
   property :name,             String
   property :surname,          String
-  property :email,            String, :length => 100
-  # BCrypt gives you a 60 character string
-  property :crypted_password, String, :length => 60
+  property :email,            String
+  property :crypted_password, String, :length => 70
   property :role,             String
 
   # Validations
@@ -46,11 +45,11 @@ class Account
   end
 
   private
-    def password_required
-      crypted_password.blank? || password.present?
-    end
+  def password_required
+    crypted_password.blank? || password.present?
+  end
 
-    def encrypt_password
-      self.crypted_password = ::BCrypt::Password.create(password) if password.present?
-    end
+  def encrypt_password
+    self.crypted_password = ::BCrypt::Password.create(password) if password.present?
+  end
 end

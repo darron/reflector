@@ -1,23 +1,58 @@
-source :rubygems
+source "https://rubygems.org/"
+
+# Server requirements
+# gem 'thin' # or mongrel
+gem 'unicorn'
+
+# gem 'trinidad', :platform => 'jruby'
 
 # Project requirements
 gem 'rake'
-gem 'rack-flash'
-gem 'thin' # or mongrel
+gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
 gem 'bcrypt-ruby', :require => "bcrypt"
-gem 'haml'
-gem 'dm-sqlite-adapter'
-gem 'dm-mysql-adapter'
-gem 'data_mapper'
-gem 'redis'
-gem 'redis-namespace'
-gem 'gitshapage', :require => false
-gem 'capistrano', :require => false
+gem 'rack-less'
+gem 'less'
+gem 'erubis', "~> 2.7.0"
+gem 'dm-validations'
+gem 'dm-timestamps'
+gem 'dm-migrations'
+gem 'dm-constraints'
+gem 'dm-aggregates'
+gem 'dm-core'
+
+gem 'therubyracer'
+
+gem 'foreman'
+
+gem 'json'
+
+group :development do
+  gem 'dm-sqlite-adapter'
+  gem 'tunnel-vmc-plugin'
+  gem 'vmc', "~> 0.4.7"
+  gem 'caldecott'
+end
+
+group :production do
+ gem 'pg'
+ gem 'do_postgres'
+ gem 'dm-postgres-adapter'
+end
 
 # Test requirements
+gem 'rspec'
+gem 'rack-test'
 
+# Padrino Stable Gem
+gem 'padrino', '0.10.7'
 
-# Padrino
-gem 'padrino', "0.9.23"
+# Or Padrino Edge
+# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+
+# Or Individual Gems
+# %w(core gen helpers cache mailer admin).each do |g|
+#   gem 'padrino-' + g, '0.10.7'
+# end
+  

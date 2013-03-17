@@ -9,17 +9,33 @@
 # DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "development.db"))
 #
 
-# PADRINO_ENV=production bundle exec padrino rake dm:migrate
-# PADRINO_ENV=production bundle exec padrino rake seed
-
 DataMapper.logger = logger
+DataMapper::Property::String.length(255)
 
-case Padrino.env
-  when :development then DataMapper.setup(:default, 'mysql://root:@localhost/reflector')
-  when :production  then DataMapper.setup(:default, 'mysql://root:@localhost/reflector')
-  when :test        then DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "reflector_test.db"))
+# Migrations and seeding.
+#
+# `bundle exec vmc tunnel` into the Posgresql CF instance.
+# 
+# Edit the below manual database connection string. Once you've done that:
+#
+# `PADRINO_ENV=production rake dm:migrate`
+# `PADRINO_ENV=production rake seed`
+#
+# While being connected to the remote database.
+#
+# postgres_connection = "postgres://username:password@127.0.0.1:port/name" 
+
+if ENV['VCAP_SERVICES'].nil? # Not on Cloudfoundry - probably on Heroku.
+	postgres_connection = ENV["DATABASE_URL"]
+else
+	services = JSON.parse(ENV['VCAP_SERVICES'])
+	postgresql_key = services.keys.select { |svc| svc =~ /postgresql/i }.first
+	postgresql = services[postgresql_key].first['credentials']
+	postgres_connection = "postgres://#{postgresql['user']}:#{postgresql['password']}@#{postgresql['hostname']}:#{postgresql['port']}/#{postgresql['name']}" 	
 end
 
-# Conntect to redis db 1.
-config = YAML::load(File.open("#{PADRINO_ROOT}/config/redis.yml"))
-$redis = Redis.new(config.symbolize_keys)
+case Padrino.env
+  	when :development then DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "development.db"))
+  	when :production  then DataMapper.setup(:default, postgres_connection)
+  	when :test        then DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "test.db"))
+end
