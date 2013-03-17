@@ -1,0 +1,37 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to pat(:list), url(:redirects, :index) %></li>
+      <li><%= link_to pat(:new), url(:redirects, :new) %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= pat(:all) %> <% mt(:redirects) %></h2>
+    <div class="inner">
+      <table class="table">
+        <tr>
+          <th class="first"><%= mat(:redirect, :id) %></th>
+          <th><%= mat(:redirect, :title) %></th>
+          <th><%= mat(:redirect, :url) %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @redirects.each do |redirect| %>
+        <tr>
+          <td class="first"><%= redirect.id %></td>
+          <td><%= redirect.title %></td>
+          <td><%= redirect.url %></td>
+          <td class="last">
+            <%= button_to pat(:show), url(:redirects, :show, :id => redirect.id), :method => :get, :class => :button_to %> |
+            <%= button_to pat(:edit), url(:redirects, :edit, :id => redirect.id), :method => :get, :class => :button_to %> |
+            <%= button_to pat(:delete), url(:redirects, :destroy, :id => redirect.id), :method => :delete, :class => :button_to, :onsubmit => "return confirm('#{pat(:confirm)}')" %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, partial("base/sidebar") %>
